@@ -15,7 +15,7 @@ router = APIRouter()
 @router.post("/users/register", response_model=UserResponse)
 async def register(user_id: str = Form(...), image: UploadFile = File(...)):
     """회원 등록 엔드포인트"""
-image_data = await image.read()
+    image_data = await image.read()
     registered_user = register_user(user_id, image_data)
 
     return UserResponse(
@@ -40,7 +40,7 @@ async def authenticate(image: UploadFile = File(...)):
 @router.get("/users/{user_id}")
 def get_user_info(user_id: str):
     """회원 정보 조회 엔드포인트"""
-user_info = get_user(user_id)
+    user_info = get_user(user_id)
 
     if user_info is None:
         raise HTTPException(status_code=404, detail="사용자가 존재하지 않습니다.")
